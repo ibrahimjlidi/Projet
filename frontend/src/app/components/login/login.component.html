@@ -1,0 +1,15 @@
+<h1 style="text-align: center; ">Login Page
+</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+ <div class ="container">
+   <mat-form-field>
+    <input matInput placeholder="Email" formControlName="email" >
+    <mat-hint *ngIf="loginForm.controls['email'].errors" class="text">Email is required</mat-hint>
+   </mat-form-field>
+   <mat-form-field>
+    <input matInput placeholder="Password" formControlName="password" >
+    <mat-hint *ngIf="loginForm.controls['password'].errors" class="text">Password is required</mat-hint>
+   </mat-form-field>
+   <button mat-flat-button color="red" [disabled]="loginForm.invalid" type="submit">login</button>
+ </div>
+</form>
