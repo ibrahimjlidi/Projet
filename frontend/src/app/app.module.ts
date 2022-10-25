@@ -30,7 +30,9 @@ import {MatButtonModule} from '@angular/material/button';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    ClarityModule
+
 
   ],
   providers: [],

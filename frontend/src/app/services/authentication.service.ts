@@ -13,6 +13,7 @@ export interface User{
   name?:string;
   username?:string;
   email?:string;
+  role?:string;
   password?:string;
   confirmPassword?:string;
 }
@@ -29,7 +30,7 @@ export class AuthenticationService {
 
    return this.http.post<any>('http://localhost:3000/api/users/login',{email:loginForm.email,password:loginForm.password}).pipe(
       map((token)=>{
-        console.log('token');
+        console.log(token);
 
         localStorage.setItem('blog-token',token.access_token);
         return token ;

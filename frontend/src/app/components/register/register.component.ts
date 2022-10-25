@@ -10,45 +10,44 @@ import { map } from 'rxjs/operators';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit{
 
   registerForm! : FormGroup;
 
   constructor(
     private authService:AuthenticationService,
     private formBuilder: FormBuilder,
-    private router:Router) { }
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
-
     this.registerForm = this.formBuilder.group({
       name:[null,[Validators.required]],
       Role:[null,[Validators.required]],
       phone:[null,[Validators.required]],
       username :[null,[Validators.required]],
-      email:[null,[Validators.required,
-      Validators.email,
-    Validators.minLength(6)
-  ]],
-  password:[null,[Validators.required,
-Validators.minLength(6)]],
-passwordConfirm:[null,[Validators.required]]
-    },
-  {
-
-  })
+      email:[null,[
+        Validators.required,
+        Validators.email,
+        Validators.minLength(6)
+      ]],
+      password:[null,[
+        Validators.required,
+        Validators.minLength(6)
+      ]],
+      passwordConfirm:[null,[Validators.required]]
+    })
   }
 
-onSubmit(){
-  
-
-  console.log(this.registerForm.value)
+  onSubmit(){
+    if(this.registerForm.invalid){
+      return;
+    }
+    console.log(this.registerForm.value)
     this.authService.register(this.registerForm.value).pipe(
-map(user => this.router.navigate(['login'])),
-
-   ).subscribe();
-
-}
+      map(user=> this.router.navigate(['login'])),
+    ).subscribe();
+  }
 
 
 }

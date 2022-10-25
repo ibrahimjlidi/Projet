@@ -32,20 +32,12 @@ export class LoginComponent implements OnInit {
 
 
 onSubmit(){
-  if (this.loginForm.invalid)
-    {
 
-      return alert('mot de passe invalid');
-
-    }
-   this.authService.login(this.loginForm.value).pipe(
+ this.authService.login(this.loginForm.value).pipe(
 
     map(token=>this.router.navigate(['admin']))
 
    ).subscribe();
 }
-
-
-
 
 }

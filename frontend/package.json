@@ -21,9 +21,9 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@cds/core": "^6.1.6",
-    "@clr/angular": "^13.8.4",
+    "@clr/angular": "^13.9.0",
     "@clr/icons": "^13.0.2",
-    "@clr/ui": "^13.8.4",
+    "@clr/ui": "^13.9.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
