@@ -15,13 +15,6 @@
       <input type="text" name="username" clrInput placeholder="name" formControlName="name"  />
       <clr-control-error *ngIf="registerForm.get('name')" class="text">Name is required</clr-control-error>
   </clr-input-container>
-  <clr-select-container>
-    <label>User Role</label>
-    <select clrSelect name="type" [formGroup]="registerForm">
-        <option value="user">Local Users</option>
-        <option value="admin">Administrator</option>
-    </select>
-</clr-select-container>
 
           <clr-input-container>
               <input type="text" name="email" clrInput placeholder="Email" formControlName="email"  />
@@ -31,6 +24,10 @@
               <input type="password" name="password" clrPassword placeholder="Password" formControlName="password"  />
               <clr-control-error *ngIf="registerForm.get('password')" class="text">Password is required</clr-control-error>
           </clr-password-container>
+          <clr-password-container>
+            <input type="password" name="passwordConfirm" clrPassword placeholder="passwordConfirm" formControlName="passwordConfirm"  />
+            <clr-control-error *ngIf="registerForm.get('passwordConfirm')" class="text">confirm Password is required</clr-control-error>
+        </clr-password-container>
           <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Register</button>
           <a href="/login" class="signup">Sign In for a Company ID</a>
       </div>

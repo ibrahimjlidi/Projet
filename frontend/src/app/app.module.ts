@@ -1,5 +1,5 @@
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -12,12 +12,15 @@ import { RegisterComponent } from './components/register/register.component';
 import {MatFormFieldModule}  from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import { UsersComponent } from './components/users/users.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,9 @@ import {MatButtonModule} from '@angular/material/button';
 
 
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
