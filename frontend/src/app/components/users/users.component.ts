@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  users!:any[];
+  users:any[] = [];
   constructor(private userService:UserService) { }
 
   ngOnInit(): void {
