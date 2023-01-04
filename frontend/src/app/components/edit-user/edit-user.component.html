@@ -1,0 +1,82 @@
+<div class="main-container">
+  <header class="header-6">
+    <div class="branding">
+      <a routerLink="/home" class="nav-link"></a>
+      <span class="title">My App </span>
+    </div>
+    <div class="branding">
+      <a routerLink="/admin" class="nav-link"><span class="title">Home </span></a>
+    </div>
+
+    <div class="header-actions">
+      <a routerLink="/admin" class="nav-link nav-text"> Admin </a>
+      <a routerLink="/login" class="nav-link nav-text"> About </a>
+      <a routerLink="/register" class="nav-link nav-text"> contact </a>
+
+    </div>
+    <form class="search">
+      <label for="search-input-sidenav-ng">
+        <input id="search-input-sidenav-ng" type="text" placeholder="Search for keywords..." />
+      </label>
+    </form>
+  </header>
+
+
+  <div class="content-container">
+    <nav class="sidenav">
+      <section class="sidenav-content">
+        <a routerLink="/post" class="nav-link">
+          Posts
+        </a>
+        <a href="/users" class="nav-link">
+          List of users
+        </a>
+        <a href="/categories" class="nav-link">
+          Categories
+        </a>
+        <section class="nav-group">
+          <input id="tabexample2" type="checkbox">
+          <label for="tabexample2"> <a routerLink="/" class="nav-link nav-text"> Deconnexion </a></label>
+
+        </section>
+      </section>
+    </nav>
+    <div class="content-area">
+
+      <div class="container mt-2">
+        <legend>Update User</legend>
+        <br>
+          <form class="clr-form clr-form-horizontal">
+            <clr-input-container>
+              <label>My email</label>
+              <input clrInput placeholder="Fill me in, scotty!" name="email" [(ngModel)]="user.email " />
+            </clr-input-container>
+            <clr-input-container>
+              <label>My role</label>
+              <input clrInput placeholder="Fill me in, scotty!" name="role" [(ngModel)]="user.role "/>
+            </clr-input-container>
+            <clr-input-container>
+              <label>My phone</label>
+              <input clrInput placeholder="Fill me in, scotty!" name="phone" [(ngModel)]="user.phone " />
+            </clr-input-container>
+            <clr-input-container>
+              <label>My name</label>
+              <input clrInput placeholder="Fill me in, scotty!" name="name" [(ngModel)]="user.name" />
+            </clr-input-container>
+            <clr-input-container>
+              <label>My username</label>
+              <input clrInput placeholder="Fill me in, scotty!" name="username" [(ngModel)]="user.username" />
+            </clr-input-container>
+            <br>
+          <button type="button" (click)="update()" class="btn btn-primary">
+            Update
+          </button>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -12,6 +12,10 @@
         <clr-control-error *ngIf="registerForm.get('phone')" class="text">Phone is required</clr-control-error>
     </clr-input-container>
     <clr-input-container>
+      <input type="text" name="role" clrInput placeholder="role" formControlName="role"  />
+      <clr-control-error *ngIf="registerForm.get('role')" class="text">role is required</clr-control-error>
+  </clr-input-container>
+    <clr-input-container>
       <input type="text" name="username" clrInput placeholder="name" formControlName="name"  />
       <clr-control-error *ngIf="registerForm.get('name')" class="text">Name is required</clr-control-error>
   </clr-input-container>
@@ -29,7 +33,7 @@
             <clr-control-error *ngIf="registerForm.get('passwordConfirm')" class="text">confirm Password is required</clr-control-error>
         </clr-password-container>
           <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Register</button>
-          <a href="/login" class="signup">Sign In for a Company ID</a>
+          <a href="" class="signup">Sign In for a Company ID</a>
       </div>
   </form>
 </div>

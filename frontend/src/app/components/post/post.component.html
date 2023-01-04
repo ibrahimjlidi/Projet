@@ -1,0 +1,74 @@
+<div class="main-container">
+  <header class="header-6">
+    <div class="branding">
+      <a routerLink="/home" class="nav-link"></a>
+      <span class="title">My App </span>
+    </div>
+    <div class="branding">
+      <a routerLink="/admin" class="nav-link"><span class="title">Home </span></a>
+    </div>
+
+    <div class="header-actions">
+      <a routerLink="/admin" class="nav-link nav-text"> Admin </a>
+      <a routerLink="/login" class="nav-link nav-text"> About </a>
+      <a routerLink="/register" class="nav-link nav-text"> contact </a>
+
+    </div>
+  </header>
+  <div class="content-container">
+    <nav class="sidenav">
+      <section class="sidenav-content">
+        <a routerLink="/post" class="nav-link">
+          Posts
+        </a>
+        <a href="/users" class="nav-link">
+          List of users
+        </a>
+        <a href="/categories" class="nav-link">
+          Categories
+        </a>
+
+        <section class="nav-group">
+          <input id="tabexample2" type="checkbox">
+          <label for="tabexample2"> <a routerLink="/" class="nav-link nav-text"> Deconnexion </a></label>
+
+        </section>
+      </section>
+    </nav>
+
+    <div class="content-area">
+
+      <div *ngFor="let post of posts
+                   | orderBy:'createdOn'
+                   | filterBy: searchInput
+                   | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPg}"
+                   class="clr-row">
+        <div >
+          <a href="..." class="card clickable mr-0 mb-4">
+            <div class="card-img">
+              <img class="card-img-top img-card" [src]="post.mainImageUrl" alt="{{post.title}}" />
+            </div>
+            <div class="card-block">
+              <div class="small text-muted">{{post.createdOn | date:'medium'}}</div>
+              <h2 class="card-title h4">{{post.title}}</h2>
+              <p class="card-text">{{post.content.substr(0,30)}}...</p>
+              <p class="card-text">
+                ...
+              </p>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-2 py-2 justify-center row">
+
+  <div class="block"><pagination-controls (pageChange)="currentPg =$event"></pagination-controls></div>
+ <div class="block"> <select class="form-control" [value]="itemsPerPage" (change)="PageSize($event)">
+    <option value="4">4 par page</option>
+    <option value="6">6 par page</option>
+    <option value="8">8 par page</option>
+    </select></div></div>
+
+</div>

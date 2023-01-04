@@ -1,4 +1,6 @@
 
+import { Roles } from "src/auth/gurads/role.enum";
+
 export interface User {
 
     id?:number;
@@ -6,12 +8,6 @@ export interface User {
     username?:string;
     email?:string;
     password?:string;
-    role?: UserRole;
+    role?: Roles;
     phone?:number;
 }
-export  enum UserRole{
-    ADMIN ='admin',
-    CHIEFEDITOR ='chiefeditor',
-    EDITOR='editor',
-    USER='user'
- }

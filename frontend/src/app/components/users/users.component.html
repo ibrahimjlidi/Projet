@@ -1,17 +1,88 @@
-<clr-datagrid>
-  <clr-dg-column>User ID</clr-dg-column>
-  <clr-dg-column>Name</clr-dg-column>
-  <clr-dg-column>Phone </clr-dg-column>
-  <clr-dg-column>Username</clr-dg-column>
-  <clr-dg-column>Email</clr-dg-column>
+<div class="main-container">
+  <header class="header-6">
+    <div class="branding">
+      <a routerLink="/home" class="nav-link"></a>
+      <span class="title">My App </span>
+    </div>
+    <div class="branding">
+      <a routerLink="/admin" class="nav-link"><span class="title">Home </span></a>
+    </div>
 
-  <clr-dg-row *ngFor="let user of users">
-      <clr-dg-cell>{{user?.id}}</clr-dg-cell>
-      <clr-dg-cell>{{user?.name}}</clr-dg-cell>
-      <clr-dg-cell>{{user?.phone }}</clr-dg-cell>
-      <clr-dg-cell>{{user?.username}}</clr-dg-cell>
-      <clr-dg-cell>{{user?.email}}</clr-dg-cell>
-  </clr-dg-row>
+    <div class="header-actions">
+      <a routerLink="/admin" class="nav-link nav-text"> Admin </a>
+      <a routerLink="/login" class="nav-link nav-text"> About </a>
+      <a routerLink="/register" class="nav-link nav-text"> contact </a>
 
-  <clr-dg-footer>{{users.length}} users</clr-dg-footer>
-</clr-datagrid>
+    </div>
+  </header>
+
+
+  <div class="content-container">
+    <nav class="sidenav">
+      <section class="sidenav-content">
+        <a routerLink="/post" class="nav-link">
+          Posts
+        </a>
+        <a href="/users" class="nav-link">
+          List of users
+        </a>
+        <a href="/categories" class="nav-link">
+          Categories
+        </a>
+
+        <section class="nav-group">
+          <input id="tabexample2" type="checkbox">
+          <label for="tabexample2"> <a routerLink="/" class="nav-link nav-text"> Deconnexion </a></label>
+
+        </section>
+      </section>
+    </nav>
+
+
+    <div class="container espace">
+
+
+
+      <div class="bg">
+        <td class="color pad"> <label>Filtre : </label></td>
+        <td class="color pad"><input clrInput placeholder="Filter By role" name="input"  [(ngModel)]="searchInput.role" /></td>
+      </div>
+      <clr-datagrid>
+
+        <clr-dg-column class="color">User ID</clr-dg-column>
+        <clr-dg-column class="color">Name</clr-dg-column>
+        <clr-dg-column class="color">Phone </clr-dg-column>
+        <clr-dg-column class="color">Username</clr-dg-column>
+        <clr-dg-column class="color">Role</clr-dg-column>
+        <clr-dg-column class="color">Email</clr-dg-column>
+        <clr-dg-column class="color">Edit</clr-dg-column>
+
+        <clr-dg-row *ngFor="let user of users
+                    | orderBy :'username'
+                    |filterBy: searchInput
+                    | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPg}" >
+          <clr-dg-cell>{{user?.id}}</clr-dg-cell>
+          <clr-dg-cell>{{user?.name}}</clr-dg-cell>
+          <clr-dg-cell>{{user?.phone }}</clr-dg-cell>
+          <clr-dg-cell>{{user?.username}}</clr-dg-cell>
+          <clr-dg-cell>{{user?.role}}</clr-dg-cell>
+          <clr-dg-cell>{{user?.email}}</clr-dg-cell>
+          <clr-dg-cell>
+            <button class="btn"[routerLink]="['/edit-user',user.id]">Edit</button>
+            <button type="button" (click)="deleteUser(user.id)" class="btn btn-danger">Delete</button>
+          </clr-dg-cell>
+        </clr-dg-row>
+        <clr-dg-footer *ngIf="(users |filterBy:searchInput).length===0">No Match</clr-dg-footer>
+        <clr-dg-footer>
+          <div class="col-md-2 d-flex justify-content-center right">
+          <select class="form-control" [value]="itemsPerPage" (change)="PageSize($event)">
+          <option value="2">2 par page</option>
+          <option value="4">4 par page</option>
+          <option value="6">6 par page</option>
+          </select>
+        </div>
+          <pagination-controls (pageChange)="currentPg =$event" class="mt-8 py-5 flex justify-center items-center"></pagination-controls>{{users.length}} users</clr-dg-footer>
+      </clr-datagrid>
+    </div>
+  </div>
+</div>

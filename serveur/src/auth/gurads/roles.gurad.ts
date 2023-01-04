@@ -1,44 +1,39 @@
+import { ROLES_KEY } from './../decorator/roles.decorator';
 import { User } from 'src/user/models/user.interface';
 import { map, Observable } from 'rxjs';
 import { UserService } from './../../user/service/user.service';
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
-import { Reflector } from "@nestjs/core";
-
-
-
+import {
+  CanActivate,
+  ExecutionContext,
+  forwardRef,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { Roles } from './role.enum';
 
 @Injectable()
-export class  RolesGuard implements CanActivate{
-constructor(
-    private reflector :Reflector,
-    private userService:UserService
-    ){}
+export class RolesGuard implements CanActivate {
+  constructor(private reflector: Reflector) { }
 
+  canActivate(context: ExecutionContext): boolean {
+    const Roles = this.reflector.get<string[]>('roles', context.getHandler());
+    if (!Roles) {
+      return true;
+    }
+    const request = context.switchToHttp().getRequest();
+    console.log(request)
+    
+    const user : User= request.user.user;
+    
+      console.log(user.role)
 
-canActivate(context :ExecutionContext): boolean | Promise<boolean>|Observable<boolean>{
-   const  roles = this.reflector.get<string[]>('roles',context.getHandler());
-
-
-   if (!roles){
-
-    return true;
-   }
-
-   const request = context.switchToHttp().getRequest();
- 
-   const users:User = request.User;
-   console.log(users);
-    return this.userService.findOne(users.id).pipe(
-        map((users:User) => {
-
-            const hasRole = () =>roles.indexOf(users.role) > -1;
-            let hasPermission: boolean = false;
-
-            if (hasRole()) {hasPermission= true};
-            return users && hasPermission;
-        })
-    )
-
-}
-
+    
+    if (!Roles.includes(user.role)) {
+      throw new UnauthorizedException('not admin ');
+      
+    }
+    return Roles.includes(user.role);
+  }
 }
